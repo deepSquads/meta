@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+
+# Copyright © Michal Čihař <michal@weblate.org>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+"""Synchronizes pre-commit config for Weblate repositories."""
+
+import subprocess
+import sys
+
+import ruamel.yaml
+
+yaml = ruamel.yaml.YAML()
+yaml.indent = 2
+yaml.preserve_quotes = False
+yaml.width = sys.maxsize
+
+with open(sys.argv[1]) as handle:
+    data = yaml.load(handle)
+
+remove = []
+changed = False
+
+for offset, repo in enumerate(data["repos"]):
+    if repo["repo"] in (
+        "https://github.com/asottile/pyupgrade",
+        "https://github.com/psf/black",
+        "https://github.com/PyCQA/isort",
+    ):
+        remove.insert(0, offset)
+
+if remove:
+    for offset in remove:
+        del data["repos"][offset]
+    changed = True
+
+for repo in data["repos"]:
+    if (
+        repo["repo"] == "https://github.com/astral-sh/ruff-pre-commit"
+        and len(repo["hooks"]) == 1
+    ):
+        repo["hooks"].append({"id": "ruff-format"})
+        changed = True
+
+if changed:
+    with open(sys.argv[1], "w") as handle:
+        yaml.dump(data, handle)
+
+    subprocess.run(
+        ["pre-commit", "run", "--files", sys.argv[1]], check=False, capture_output=True
+    )

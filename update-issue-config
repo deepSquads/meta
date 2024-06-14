@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+
+# Copyright © Michal Čihař <michal@weblate.org>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+"""Synchronizes GitHub issue template links for Weblate repositories."""
+
+import os
+import subprocess
+import sys
+
+import ruamel.yaml
+
+root = sys.argv[1]
+
+yaml = ruamel.yaml.YAML()
+yaml.indent = 2
+yaml.preserve_quotes = False
+yaml.width = sys.maxsize
+
+filename = ".github/ISSUE_TEMPLATE/config.yml"
+sourcename = os.path.join(root, filename)
+dirname = os.path.dirname(filename)
+
+if not os.path.exists(dirname):
+    os.makedirs(dirname)
+
+# Parse meta issue config (template)
+with open(sourcename) as handle:
+    template = yaml.load(handle)
+    links = {link["url"]: link for link in template["contact_links"]}
+
+# Parse repository config, fall back to template if not present
+try:
+    with open(filename) as handle:
+        data = yaml.load(handle)
+except OSError:
+    with open(sourcename) as handle:
+        data = yaml.load(handle)
+
+data.yaml_set_start_comment(
+    """
+# Copyright © Michal Čihař <michal@weblate.org>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+# This file is maintained in https://github.com/WeblateOrg/meta/
+# and generated using update-issue-config there.
+"""
+)
+
+if "contact_links" not in data:
+    data["contact_links"] = []
+
+for pos, item in enumerate(data["contact_links"]):
+    if item["url"] in links:
+        data["contact_links"][pos] = links.pop(item["url"])
+
+data["contact_links"].extend(links.values())
+
+with open(filename, "w") as handle:
+    yaml.dump(data, handle)
+
+subprocess.run(
+    ["pre-commit", "run", "--files", filename], check=False, capture_output=True
+)

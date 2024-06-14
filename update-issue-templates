@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+
+# Copyright © Michal Čihař <michal@weblate.org>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+"""Generate issue templates from snippets."""
+
+FILES = {
+    "bug_report.yml": (
+        "head",
+        "bug_report",
+        "commercial",
+        "describe-issue",
+        "tried",
+        "reproduce",
+        "expected",
+        "screenshots",
+        "exception",
+        "additional",
+    ),
+    "bug_report.weblate.yml": (
+        "head",
+        "bug_report",
+        "commercial",
+        "describe-issue",
+        "tried",
+        "reproduce",
+        "expected",
+        "screenshots",
+        "exception",
+        "weblate-versions",
+        "weblate-checks",
+        "additional",
+    ),
+    "feature_request.yml": (
+        "head",
+        "feature_request",
+        "commercial",
+        "feature-describe",
+        "feature-solution",
+        "feature-alternatives",
+        "screenshots",
+        "additional",
+    ),
+}
+
+SNIPPETS = {}
+for snippets in FILES.values():
+    for snippet in snippets:
+        if snippet not in SNIPPETS:
+            filename = f".github/ISSUE_TEMPLATE/snippets/{snippet}.yml"
+            with open(filename) as handle:
+                SNIPPETS[snippet] = handle.read()
+
+for filename, snippets in FILES.items():
+    with open(f".github/ISSUE_TEMPLATE/{filename}", "w") as handle:
+        for snippet in snippets:
+            handle.write(SNIPPETS[snippet])

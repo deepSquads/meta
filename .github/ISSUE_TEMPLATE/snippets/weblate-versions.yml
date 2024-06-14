@@ -1,0 +1,46 @@
+- type: dropdown
+  id: installation
+  attributes:
+    label: How do you run Weblate?
+    options:
+    - ''
+    - weblate.org service
+    - Docker container
+    - PyPI module
+    - Git checkout
+    - Other
+  validations:
+    required: true
+- type: textarea
+  id: versions
+  attributes:
+    label: Weblate versions
+    description: >
+      Please paste the output of the
+      [list_versions](https://docs.weblate.org/en/latest/admin/management.html#list-versions)
+      command here.
+
+      Depending on the installation, these can be executed in a different
+      way. Please consult [the management commands
+      documentation](https://docs.weblate.org/en/latest/admin/management.html)
+      for more details.
+
+      On pip-installed Weblate:
+
+      ```
+      weblate list_versions
+      ```
+
+      On Git checkout:
+
+      ```
+      ./manage.py list_versions
+      ```
+
+      Using docker-compose-plugin:
+
+      ```
+      docker compose exec --user weblate weblate weblate list_versions
+      ```
+
+      This will properly render without any escaping.

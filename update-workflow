@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+# Copyright © Michal Čihař <michal@weblate.org>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+"""Synchronizes GitHub workflows for Weblate repositories."""
+
+import subprocess
+import sys
+
+import ruamel.yaml
+
+RUNS_UPDATE = {
+    "ubuntu-latest": "ubuntu-22.04",
+    "macos-latest": "macos-13",
+    "windows-latest": "windows-2022",
+}
+
+yaml = ruamel.yaml.YAML()
+yaml.indent = 2
+yaml.preserve_quotes = False
+yaml.width = sys.maxsize
+
+with open(sys.argv[1]) as handle:
+    data = yaml.load(handle)
+
+modified = False
+
+for job_name in data["jobs"]:
+    job = data["jobs"][job_name]
+
+    # Avoid using *-latest OS, pin it instead
+    if job["runs-on"] in RUNS_UPDATE:
+        job["runs-on"] = RUNS_UPDATE[job["runs-on"]]
+        modified = True
+
+    # Use latest stable Python version for all workflows
+    for step in job["steps"]:
+        if step.get("uses", "").startswith("actions/setup-python@"):
+            try:
+                float(step["with"]["python-version"])
+            except (KeyError, ValueError):
+                continue
+            step["with"]["python-version"] = "3.11"
+            modified = True
+
+if modified:
+    with open(sys.argv[1], "w") as handle:
+        yaml.dump(data, handle)
+
+    subprocess.run(
+        ["pre-commit", "run", "--files", sys.argv[1]], check=False, capture_output=True
+    )
