@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright © Michal Čihař <michal@weblate.org>
+# Copyright © KhulnaSoft Dev <info@khulnasoft.com>
 #
 # SPDX-License-Identifier: CC0-1.0
 
@@ -11,9 +11,9 @@ REPOS="
     wlc
     scripts
     fedora_messaging
-    weblate
+    deepsquads
     website
-    weblate_schemas
+    deepsquads_schemas
     translation-finder
     munin
     fail2ban
@@ -119,7 +119,7 @@ copyfile() {
 
 for repo in $REPOS ; do
     if [ ! -d "$repo" ] ; then
-        git clone "git@github.com:WeblateOrg/$repo.git"
+        git clone "git@github.com:deepSquads/$repo.git"
         cd "$repo"
     else
         cd "$repo"
@@ -163,7 +163,7 @@ for repo in $REPOS ; do
     # Add and push
     git add .
     if ! git diff --cached --exit-code ; then
-        git commit -m 'Sync with WeblateOrg/meta'
+        git commit -m 'Sync with deepSquads/meta'
         git push
     fi
 

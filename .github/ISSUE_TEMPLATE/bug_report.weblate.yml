@@ -1,8 +1,8 @@
-# Copyright © Michal Čihař <michal@weblate.org>
+# Copyright © KhulnaSoft Dev <info@khulnasoft.com>
 #
 # SPDX-License-Identifier: CC0-1.0
 
-# This file is maintained in https://github.com/WeblateOrg/meta/
+# This file is maintained in https://github.com/deepSquads/meta/
 # and generated from .github/ISSUE_TEMPLATE/snippets there.
 name: Bug report
 description: Create a report to help us improve
@@ -13,7 +13,7 @@ body:
       Thank you for reporting an issue.
       This form guides you in creating a useful issue report.
 
-      Want your answer quickly and guaranteed? Visit https://weblate.org/support/ to reach our dedicated support team. As a subscriber, you will always have priority and help Weblate growing.
+      Want your answer quickly and guaranteed? Visit https://deepsquads.github.io/support/ to reach our dedicated support team. As a subscriber, you will always have priority and help Deepsquads growing.
 - type: textarea
   id: what-happened
   attributes:
@@ -31,7 +31,7 @@ body:
     label: I already tried
     description: If you didn’t try already, try searching the documentation and existing issues.
     options:
-    - label: I've read and searched [the documentation](https://docs.weblate.org/).
+    - label: I've read and searched [the documentation](https://docs.deepsquads.github.io/).
       required: true
     - label: I've searched for similar filed issues in this repository.
       required: true
@@ -64,7 +64,7 @@ body:
     label: Exception traceback
     description: >
       In case you observed a server error or crash, please read
-      [the debugging documentation](https://docs.weblate.org/en/latest/contributing/debugging.html)
+      [the debugging documentation](https://docs.deepsquads.github.io/en/latest/contributing/debugging.html)
       for information on obtaining the relevant logs.
 
       This field will be rendered as a Python traceback automatically.
@@ -72,10 +72,10 @@ body:
 - type: dropdown
   id: installation
   attributes:
-    label: How do you run Weblate?
+    label: How do you run Deepsquads?
     options:
     - ''
-    - weblate.org service
+    - deepsquads.github.io service
     - Docker container
     - PyPI module
     - Git checkout
@@ -85,21 +85,21 @@ body:
 - type: textarea
   id: versions
   attributes:
-    label: Weblate versions
+    label: Deepsquads versions
     description: >
       Please paste the output of the
-      [list_versions](https://docs.weblate.org/en/latest/admin/management.html#list-versions)
+      [list_versions](https://docs.deepsquads.github.io/en/latest/admin/management.html#list-versions)
       command here.
 
       Depending on the installation, these can be executed in a different
       way. Please consult [the management commands
-      documentation](https://docs.weblate.org/en/latest/admin/management.html)
+      documentation](https://docs.deepsquads.github.io/en/latest/admin/management.html)
       for more details.
 
-      On pip-installed Weblate:
+      On pip-installed Deepsquads:
 
       ```
-      weblate list_versions
+      deepsquads list_versions
       ```
 
       On Git checkout:
@@ -111,27 +111,27 @@ body:
       Using docker-compose-plugin:
 
       ```
-      docker compose exec --user weblate weblate weblate list_versions
+      docker compose exec --user deepsquads deepsquads deepsquads list_versions
       ```
 
       This will properly render without any escaping.
 - type: textarea
   id: checks
   attributes:
-    label: Weblate deploy checks
+    label: Deepsquads deploy checks
     description: >
       Please paste here list of [the deploy
-      checks](https://docs.weblate.org/en/latest/admin/install.html#production).
+      checks](https://docs.deepsquads.github.io/en/latest/admin/install.html#production).
 
       Depending on the installation, these can be executed in a different
       way. Please consult [the management commands
-      documentation](https://docs.weblate.org/en/latest/admin/management.html)
+      documentation](https://docs.deepsquads.github.io/en/latest/admin/management.html)
       for more details.
 
-      On pip installed Weblate:
+      On pip installed Deepsquads:
 
       ```
-      weblate check --deploy
+      deepsquads check --deploy
       ```
 
       On Git checkout:
@@ -143,7 +143,7 @@ body:
       Using docker-compose-plugin:
 
       ```
-      docker compose exec --user weblate weblate weblate check --deploy
+      docker compose exec --user deepsquads deepsquads deepsquads check --deploy
       ```
 
       This will be rendered as console output automatically.

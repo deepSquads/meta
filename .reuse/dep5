@@ -1,12 +1,12 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Weblate Meta
-Upstream-Contact: Michal Čihař <michal@weblate.org>
-Source: https://weblate.org/
+Upstream-Name: Deepsquads Meta
+Upstream-Contact: KhulnaSoft Dev <info@khulnasoft.com>
+Source: https://deepsquads.github.io/
 
 Files: .github/ISSUE_TEMPLATE/snippets/*.yml
-Copyright: Michal Čihař <michal@weblate.org>
+Copyright: KhulnaSoft Dev <info@khulnasoft.com>
 License: CC0-1.0
 
 Files: .gitignore .pre-commit-config.yaml dummy/dummy.css requirements-lint.txt requirements.txt pyproject.toml
-Copyright: Michal Čihař <michal@weblate.org>
+Copyright: KhulnaSoft Dev <info@khulnasoft.com>
 License: CC0-1.0

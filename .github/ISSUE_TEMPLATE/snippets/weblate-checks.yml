@@ -1,20 +1,20 @@
 - type: textarea
   id: checks
   attributes:
-    label: Weblate deploy checks
+    label: Deepsquads deploy checks
     description: >
       Please paste here list of [the deploy
-      checks](https://docs.weblate.org/en/latest/admin/install.html#production).
+      checks](https://docs.deepsquads.github.io/en/latest/admin/install.html#production).
 
       Depending on the installation, these can be executed in a different
       way. Please consult [the management commands
-      documentation](https://docs.weblate.org/en/latest/admin/management.html)
+      documentation](https://docs.deepsquads.github.io/en/latest/admin/management.html)
       for more details.
 
-      On pip installed Weblate:
+      On pip installed Deepsquads:
 
       ```
-      weblate check --deploy
+      deepsquads check --deploy
       ```
 
       On Git checkout:
@@ -26,7 +26,7 @@
       Using docker-compose-plugin:
 
       ```
-      docker compose exec --user weblate weblate weblate check --deploy
+      docker compose exec --user deepsquads deepsquads deepsquads check --deploy
       ```
 
       This will be rendered as console output automatically.

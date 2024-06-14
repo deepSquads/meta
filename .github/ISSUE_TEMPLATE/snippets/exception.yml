@@ -4,7 +4,7 @@
     label: Exception traceback
     description: >
       In case you observed a server error or crash, please read
-      [the debugging documentation](https://docs.weblate.org/en/latest/contributing/debugging.html)
+      [the debugging documentation](https://docs.deepsquads.github.io/en/latest/contributing/debugging.html)
       for information on obtaining the relevant logs.
 
       This field will be rendered as a Python traceback automatically.

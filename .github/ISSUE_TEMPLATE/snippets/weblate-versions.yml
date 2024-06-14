@@ -1,10 +1,10 @@
 - type: dropdown
   id: installation
   attributes:
-    label: How do you run Weblate?
+    label: How do you run Deepsquads?
     options:
     - ''
-    - weblate.org service
+    - deepsquads.github.io service
     - Docker container
     - PyPI module
     - Git checkout
@@ -14,21 +14,21 @@
 - type: textarea
   id: versions
   attributes:
-    label: Weblate versions
+    label: Deepsquads versions
     description: >
       Please paste the output of the
-      [list_versions](https://docs.weblate.org/en/latest/admin/management.html#list-versions)
+      [list_versions](https://docs.deepsquads.github.io/en/latest/admin/management.html#list-versions)
       command here.
 
       Depending on the installation, these can be executed in a different
       way. Please consult [the management commands
-      documentation](https://docs.weblate.org/en/latest/admin/management.html)
+      documentation](https://docs.deepsquads.github.io/en/latest/admin/management.html)
       for more details.
 
-      On pip-installed Weblate:
+      On pip-installed Deepsquads:
 
       ```
-      weblate list_versions
+      deepsquads list_versions
       ```
 
       On Git checkout:
@@ -40,7 +40,7 @@
       Using docker-compose-plugin:
 
       ```
-      docker compose exec --user weblate weblate weblate list_versions
+      docker compose exec --user deepsquads deepsquads deepsquads list_versions
       ```
 
       This will properly render without any escaping.
